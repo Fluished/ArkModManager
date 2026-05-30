@@ -1,0 +1,56 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build React + Electron installer
+        run: npm run electron-build
+        env:
+          CI: false
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get version from tag
+        id: version
+        shell: bash
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Ark Mod Manager v${{ steps.version.outputs.VERSION }}
+          draft: false
+          prerelease: false
+          body: |
+            ## Ark Mod Manager v${{ steps.version.outputs.VERSION }}
+
+            ### Install
+            Download and run **Ark Mod Manager Setup ${{ steps.version.outputs.VERSION }}.exe** below.
+
+            > **Windows SmartScreen**: Windows may show a "Windows protected your PC" warning because the app is not code-signed. Click **More info → Run anyway** to install. This is normal for unsigned open-source apps.
+
+            ### What's new
+            See [commit history](../../commits/${{ github.ref_name }}) for changes in this release.
+          files: |
+            dist/*.exe
+            dist/*.AppImage
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
