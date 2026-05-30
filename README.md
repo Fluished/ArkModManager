@@ -31,8 +31,6 @@ Go to the [Releases](../../releases) page and download the latest `Ark Mod Manag
 
 ![Ark Mod Manager screenshot](docs/screenshot.png)
 
-*(Add a screenshot to `docs/screenshot.png` after first launch)*
-
 ---
 
 ## Development
