@@ -1,5 +1,7 @@
 # Ark Mod Manager
 
+[![Built with Claude](https://img.shields.io/badge/Built%20with-Claude-D97706?style=flat-square&logo=anthropic)](https://anthropic.com)
+
 A desktop app for managing mod load order on **ARK: Survival Evolved** dedicated servers.
 
 Paste your mod ID list from ARK Server Manager, reorder mods with a click, and copy the result straight back — no more hand-editing comma-separated strings.
