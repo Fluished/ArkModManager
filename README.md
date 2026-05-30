@@ -1,6 +1,6 @@
 # Ark Mod Manager
 
-[![Built with Claude](https://img.shields.io/badge/Built%20with-Claude-D97706?style=flat-square&logo=anthropic)](https://anthropic.com)
+[![Built with Claude](https://img.shields.io/badge/Built%20with-Claude-D97706?style=flat-square&logo=anthropic)](https://anthropic.com) [![Built with Electron](https://img.shields.io/badge/Built%20with-Electron-47848F?style=flat-square&logo=electron)](https://www.electronjs.org) [![Built with React](https://img.shields.io/badge/Built%20with-React-61DAFB?style=flat-square&logo=react)](https://react.dev)
 
 A desktop app for managing mod load order on **ARK: Survival Evolved** dedicated servers.
 
