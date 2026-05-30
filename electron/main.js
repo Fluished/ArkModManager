@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, shell, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain, shell, dialog, Menu } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
@@ -30,9 +30,27 @@ function createWindow() {
   }
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  Menu.setApplicationMenu(null);
+  createWindow();
+});
 app.on('window-all-closed', () => { if (process.platform !== 'darwin') app.quit(); });
 app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) createWindow(); });
+
+const userDataPath = app.getPath('userData');
+const settingsFile = path.join(userDataPath, 'settings.json');
+
+function loadSettings() {
+  try { return JSON.parse(fs.readFileSync(settingsFile, 'utf-8')); } catch { return {}; }
+}
+function saveSettings(data) {
+  try { fs.writeFileSync(settingsFile, JSON.stringify(data, null, 2)); } catch {}
+}
+
+ipcMain.handle('get-settings', () => loadSettings());
+ipcMain.handle('save-settings', (_, data) => { saveSettings(data); return true; });
+
+ipcMain.handle('get-default-mods-path', () => getDefaultModsPath());
 
 ipcMain.handle('fetch-steam-mod-details', async (_, { modIds }) => {
   const BATCH_SIZE = 100;

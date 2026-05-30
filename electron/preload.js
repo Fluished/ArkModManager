@@ -6,4 +6,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   openFolder: (folderPath) => ipcRenderer.invoke('open-folder', folderPath),
   browseModsDir: () => ipcRenderer.invoke('browse-mods-dir'),
   importModList: () => ipcRenderer.invoke('import-mod-list'),
+  getSettings: () => ipcRenderer.invoke('get-settings'),
+  saveSettings: (data) => ipcRenderer.invoke('save-settings', data),
+  getDefaultModsPath: () => ipcRenderer.invoke('get-default-mods-path'),
 });
