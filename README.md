@@ -33,6 +33,8 @@ Go to the [Releases](../../releases) page and download the latest `Ark Mod Manag
 
 ![Ark Mod Manager screenshot](docs/screenshot.png)
 
+![Ark Mod Manager screenshot2](docs/screenshot2.png)
+
 ---
 
 ## Development
