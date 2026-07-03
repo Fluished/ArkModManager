@@ -1,57 +1,28 @@
 {
-  "name": "ark-mod-manager",
-  "version": "1.0.0",
-  "description": "Ark Survival Evolved mod order manager for dedicated servers",
-  "author": "Fluished",
-  "main": "electron/main.js",
-  "homepage": "./",
+  "name": "temp-app",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "electron": "electron .",
-    "electron-dev": "concurrently \"cross-env BROWSER=none react-scripts start\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron-build": "react-scripts build && electron-builder"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
+    "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-dialog": "^2.7.1",
+    "@tauri-apps/plugin-http": "^2.5.9",
+    "@tauri-apps/plugin-opener": "^2.5.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3",
-    "concurrently": "^8.2.0",
-    "electron": "^27.0.0",
-    "electron-builder": "^24.6.4",
-    "wait-on": "^7.2.0"
-  },
-  "build": {
-    "appId": "com.arkmodmanager.app",
-    "productName": "Ark Mod Manager",
-    "extraMetadata": {
-      "main": "electron/main.js"
-    },
-    "files": [
-      "build/**/*",
-      "electron/**/*",
-      "node_modules/**/*"
-    ],
-    "directories": {
-      "buildResources": "public",
-      "output": "dist"
-    },
-    "win": {
-      "target": [{ "target": "nsis", "arch": ["x64"] }]
-    },
-    "linux": {
-      "target": [{ "target": "AppImage", "arch": ["x64"] }]
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true
-    }
-  },
-  "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
-    "development": ["last 1 chrome version"]
+    "@tauri-apps/cli": "^2",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.6.0",
+    "typescript": "~5.8.3",
+    "vite": "^7.0.4"
   }
 }
