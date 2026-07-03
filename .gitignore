@@ -1,11 +1,11 @@
 # Dependencies
 node_modules/
 
-# React build output
-build/
-
-# Electron builder output
+# Vite build output
 dist/
+
+# Rust / Tauri build output
+src-tauri/target/
 
 # Logs
 npm-debug.log*
@@ -19,6 +19,7 @@ desktop.ini
 
 # Editor
 .vscode/
+!.vscode/extensions.json
 .idea/
 *.suo
 *.user
@@ -29,6 +30,3 @@ desktop.ini
 .env.development.local
 .env.test.local
 .env.production.local
-
-# electron-builder cache
-.cache/
