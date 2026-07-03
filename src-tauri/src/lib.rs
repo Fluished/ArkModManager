@@ -265,18 +265,30 @@ fn get_mod_folder_infos(mods_dir: String, mod_ids: Vec<String>) -> HashMap<Strin
 fn get_default_mods_path() -> String {
     let home = dirs::home_dir().unwrap_or_else(|| PathBuf::from("."));
 
-    let candidates: Vec<PathBuf> = vec![
-        PathBuf::from(r"C:\Program Files (x86)\Steam\steamapps\common\ARK\ShooterGame\Content\Mods"),
-        home.join(".steam/steam/steamapps/common/ARK/ShooterGame/Content/Mods"),
-        home.join("Library/Application Support/Steam/steamapps/common/ARK/ShooterGame/Content/Mods"),
-    ];
+    let mut candidates: Vec<PathBuf> = Vec::new();
+    
+    for drive in &["C", "D", "E", "F"] {
+        candidates.push(PathBuf::from(format!(
+            r"{}:\Program Files (x86)\Steam\steamapps\common\ARK\ShooterGame\Content\Mods",
+            drive
+        )));
+        // Direct root library alternate format
+        candidates.push(PathBuf::from(format!(
+            r"{}:\SteamLibrary\steamapps\common\ARK\ShooterGame\Content\Mods",
+            drive
+        )));
+    }
+
+    candidates.push(home.join(".steam/steam/steamapps/common/ARK/ShooterGame/Content/Mods"));
+    candidates.push(home.join("Library/Application Support/Steam/steamapps/common/ARK/ShooterGame/Content/Mods"));
 
     for candidate in &candidates {
-        if candidate.exists() {
+        if candidate.exists() && candidate.is_dir() {
             return candidate.to_string_lossy().to_string();
         }
     }
 
+    // Default backstop fallback
     home.to_string_lossy().to_string()
 }
 
